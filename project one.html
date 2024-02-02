@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"defer></script>
+    <title>Farmlands Crops and Livestock</title>
+    <style>
+        .animated-heading {
+            font-size: 2em;
+            margin: 0;
+            padding: 1em;
+            overflow: shown;
+            position: relative;
+            text-align: center;
+            color: transparent;
+            background: url("https://i.imgur.com/z321vyx.jpg") no-repeat center center fixed;
+            background-size: cover;
+            transition: color 10s ease, filter 5s ease; /* Transition for the color and blur effect over 5 seconds */
+        }
+
+        .animated-heading:before {
+            content: "";
+            position: relative;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: inherit;
+            filter: blur(8px); /* Initial blur value */
+        }
+        #home-info {
+            background:  url("https://i.imgur.com/z321vyx.jpg") no-repeat center center fixed;
+            background-size: cover;
+            padding: auto;
+            margin: auto;
+            font-size: large;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-weight: bolder;
+            text-align: center;
+            color: yellowgreen;
+        }
+        #about-info {
+            background: url("https://i.imgur.com/z321vyx.jpg") no-repeat center center fixed;
+            background-size: cover;
+            padding: 20px;
+            margin: auto;
+            font-size: large;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-weight: bolder;
+            text-align: center;
+            color: yellowgreen;
+        }
+        #services-info {
+            position: relative;
+            padding: 20px;
+            margin: auto;
+            font-size: large;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-weight: bolder;
+            text-align: center;
+            color: yellowgreen;
+            overflow: hidden; /* Ensure content doesn't overflow outside the container */
+        }
+
+        #services-info::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("https://i.imgur.com/z321vyx.jpg") no-repeat center center fixed;
+            background-size: cover;
+            filter: blur(10px);
+            z-index: -1; /* Place the blurred background behind the content */
+        }
+
+        #contact-info {
+            background: url("https://i.imgur.com/z321vyx.jpg") no-repeat center center fixed;
+            background-size: cover;
+            padding: 20px;
+            margin: auto;
+            font-size: large;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-weight: bolder;
+            text-align: center;
+            color: yellowgreen;
+        }
+        .main-nav a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            background-color: green;
+        }
+    
+        nav li {
+            margin: 0;
+            padding: 15px 20px;
+            font-size: 18px;
+        }
+    
+        nav a {
+            text-decoration: none;
+            color: white;
+        }
+
+        .product-category {
+            margin-top: 20px;
+        }
+
+        h3 {
+            color: green;
+        }
+        h4 {
+            color: green;
+        }
+        h5 {
+            color: yellowgreen;
+        }
+
+        select {
+            padding: 8px;
+            font-size: 16px;
+        }
+
+        img {
+            max-width: 30%;
+            height: auto;
+            margin-top: 10px;
+            display: block; /* Ensures the margin auto works */
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+
+        p {
+            margin-top: 10px;
+        }
+    </style>
+    
+    
+<script defer>
+document.addEventListener("DOMContentLoaded", function () {
+    // Set the default selected index for the product selector
+    document.getElementById("product-selector").selectedIndex = 0;
+
+    // Show the initial product category
+    showProductCategory();
+});
+
+function showSection(sectionId) {
+    var sections = ["home-info", "about-info", "services-info", "contact-info"];
+
+    // Set default section to "home-info" if no sectionId is provided
+    sectionId = sectionId || "home-info";
+
+    sections.forEach(function (section) {
+        var currentSection = document.getElementById(section);
+
+        // Set display based on whether it's the selected section or not
+        currentSection.style.display = section === sectionId ? "block" : "none";
+    });
+}
+
+function showProductCategory() {
+    // Get the selected category from the product selector
+    var productSelector = document.getElementById("product-selector");
+    var selectedCategory = productSelector.value;
+
+    // Get references to the different sections
+    var livestockInfo = document.getElementById("livestock-info");
+    var cropsInfo = document.getElementById("crops-info");
+    var feedsSelector = document.getElementById("feeds-info");
+
+    // Hide all sections by default
+    livestockInfo.style.display = "none";
+    cropsInfo.style.display = "none";
+    feedsSelector.style.display = "none";
+
+    // Check the selected category and display the corresponding sections
+    if (selectedCategory === "livestock") {
+        livestockInfo.style.display = "block";
+        feedsSelector.style.display = "block";
+    } else if (selectedCategory === "crops") {
+        cropsInfo.style.display = "block";
+        // Assuming showCropsCategory is defined, call it here
+        showCropsCategory();
+    }
+}
+
+function showCropsCategory() {
+    // Get the selected subcategory from the crops selector
+    var selectedSubCategory = document.getElementById("crops-selector").value;
+
+    // Get references to the different subcategory sections
+    var seedsSelector = document.getElementById("seeds-info");
+    var agrochemicalsSelector = document.getElementById("agrochemicals-info");
+    var fertilizersSelector = document.getElementById("fertilizers-info");
+
+    // Hide all subcategory sections by default
+    seedsSelector.style.display = "none";
+    agrochemicalsSelector.style.display = "none";
+    fertilizersSelector.style.display = "none";
+
+    // Check the selected subcategory and display the corresponding section
+    if (selectedSubCategory === "seeds") {
+        seedsSelector.style.display = "block";
+    } else if (selectedSubCategory === "agrochemicals") {
+        agrochemicalsSelector.style.display = "block";
+        // Assuming showAgrochemicalsCategory is defined, call it here
+        showAgrochemicalsSubCategory();
+    } else if (selectedSubCategory === "fertilizers") {
+        fertilizersSelector.style.display = "block";
+    }
+}
+
+function showAgrochemicalsSubCategory() {
+    var selectedSubCategory = document.getElementById("agrochemicals-selector").value;
+    var insecticidesSelector = document.getElementById("insecticides-info");
+    var fungicidesSelector = document.getElementById("fungicides-info");
+
+    insecticidesSelector.style.display = "none";
+    fungicidesSelector.style.display = "none";
+
+    if (selectedSubCategory === "insecticides") {
+        insecticidesSelector.style.display = "block";
+    } else if (selectedSubCategory === "fungicides") {
+        fungicidesSelector.style.display = "block";
+    }
+}
+
+function showSeedsCategory() {
+    // Fetch and display information for the seeds category
+    var collardsInfo = document.getElementById("collards-info");
+    var dek8031Info = document.getElementById("dek8031-info");
+    var pusaSawaniInfo = document.getElementById("pusaSawani-info");
+    var onionRedCreoleInfo = document.getElementById("onionRedCreole-info");
+    var omniInfo = document.getElementById("omni-info");
+
+    // Example data (replace with actual data from your database)
+    var collardsAvailability = "In stock";
+    var dek8031Availability = "Out of stock";
+    var pusaSawaniAvailability = "In stock";
+    var onionRedCreoleAvailability = "In stock";
+    var omniAvailability = "Out of stock";
+
+    var collardsPrice = "$5.00";
+    var dek8031Price = "$10.00";
+    var pusaSawaniPrice = "$7.50";
+    var onionRedCreolePrice = "$6.00";
+    var omniPrice = "$12.00";
+
+    var collardsPaymentMethods = "Credit Card, PayPal, Mpesa";
+    var dek8031PaymentMethods = "Credit Card";
+    var pusaSawaniPaymentMethods = "Credit Card, Bank Transfer";
+    var onionRedCreolePaymentMethods = "PayPal";
+    var omniPaymentMethods = "Credit Card, Bitcoin, Mpesa";
+
+    // Display availability, price, and payment information
+    document.getElementById("Availability-collards").textContent = "Availability: " + collardsAvailability;
+    document.getElementById("Price-collards").textContent = "Price: " + collardsPrice;
+    document.getElementById("Payment-Methods-collards").textContent = "Payment Methods: " + collardsPaymentMethods;
+
+    document.getElementById("Availability-dek8031").textContent = "Availability: " + dek8031Availability;
+    document.getElementById("Price-dek8031").textContent = "Price: " + dek8031Price;
+    document.getElementById("Payment-Methods-dek8031").textContent = "Payment Methods: " + dek8031PaymentMethods;
+
+    document.getElementById("Availability-pusaSawani").textContent = "Availability: " + pusaSawaniAvailability;
+    document.getElementById("Price-pusaSawani").textContent = "Price: " + pusaSawaniPrice;
+    document.getElementById("Payment-Methods-pusaSawani").textContent = "Payment Methods: " + pusaSawaniPaymentMethods;
+
+    document.getElementById("Availability-onionRedCreole").textContent = "Availability: " + onionRedCreoleAvailability;
+    document.getElementById("Price-onionRedCreole").textContent = "Price: " + onionRedCreolePrice;
+    document.getElementById("Payment-Methods-onionRedCreole").textContent = "Payment Methods: " + onionRedCreolePaymentMethods;
+
+    document.getElementById("Availability-omni").textContent = "Availability: " + omniAvailability;
+    document.getElementById("Price-omni").textContent = "Price: " + omniPrice;
+    document.getElementById("Payment-Methods-omni").textContent = "Payment Methods: " + omniPaymentMethods;
+
+    // Additional logic if needed for other information
+
+    // Example: You can set different styles based on availability
+    setAvailabilityStyle(collardsInfo, collardsAvailability);
+    setAvailabilityStyle(dek8031Info, dek8031Availability);
+    setAvailabilityStyle(pusaSawaniInfo, pusaSawaniAvailability);
+    setAvailabilityStyle(onionRedCreoleInfo, onionRedCreoleAvailability);
+    setAvailabilityStyle(omniInfo, omniAvailability);
+}
+
+function setAvailabilityStyle(element, availability) {
+    // Example: Set a specific style based on availability
+    if (availability.toLowerCase() === "in stock") {
+        element.style.border = "2px solid green";
+    } else if (availability.toLowerCase() === "out of stock") {
+        element.style.border = "2px solid red";
+    }
+}
+
+</script>
+</head>
+
+<body>
+    <header>
+        <div class="animated-heading">
+            <div class="animated-heading:before">
+                <img src="https://i.imgur.com/prTJufJ.png" alt="Farmland Preface">
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="javascript:void(0);" onclick="showSection('home-info')">Home</a></li>
+            <li><a href="javascript:void(0);" onclick="showSection('about-info')">About</a></li>
+            <li><a href="javascript:void(0);" onclick="showSection('services-info')">Services</a></li>
+            <li><a href="javascript:void(0);" onclick="showSection('contact-info')">Contact</a></li>
+        </ul>
+    </nav>
+    
+
+    <div class="search-wrapper">
+        <label for="search">Search Product</label>
+        <input type="search" id="search">
+        <button onclick="performSearch()">Search</button>
+    </div>
+    <div class="user-cards" id="user-cards-container"></div>
+    <template data-user-template>
+        <div class="cards">
+            <div class="header"></div>
+            <div class="body"></div>
+        </div>
+    </template>
+    
+    
+    
+
+    <section id="home-info">
+        <h2>Home</h2>
+        <p>Welcome to Farmlands Crops and Livestock. Karibu</p>
+    </section>
+
+    <section id="about-info">
+        <h2>About Us</h2>
+        <p>Welcome to Farmlands Crops and Livestock, your trusted partner in agriculture. With a passion for sustainable farming, we offer a wide range of products to support your agricultural needs.</p>
+
+        <h3>Our Products</h3>
+
+        <div class="product-category">
+            <h4>Seeds</h4>
+            <p>Explore our high-quality seeds selection, including varieties of crops such as collards, DEKALB, Royalseed, and Simlaw Seeds. We provide top-notch seeds to enhance your crop production.</p>
+        </div>
+
+        <div class="product-category">
+            <h4>Agrochemicals</h4>
+            <p>Our agrochemicals are designed to protect and nourish your crops. Choose from our selection of fungicides, insecticides, and fertilizers to ensure the health and vitality of your plants.</p>
+
+            <div class="crops-category">
+                <h5>Fungicides</h5>
+                <p>Guard your crops against fungal diseases with our effective range of fungicides. We offer solutions to keep your plants healthy and disease-free.</p>
+            </div>
+
+            <div class="crops-category">
+                <h5>Insecticides</h5>
+                <p>Combat pests and insects with our reliable insecticides. Safeguard your crops and ensure a bountiful harvest with our proven insect control solutions.</p>
+            </div>
+        </div>
+
+        <div class="product-category">
+            <h4>Fertilizers</h4>
+            <p>Nourish your soil and promote robust plant growth with our quality fertilizers. Choose from a variety of formulations to meet the specific nutritional needs of your crops.</p>
+        </div>
+
+        <p>At Farmlands Crops and Livestock, we are committed to supporting farmers with the best products and expertise. Join us on the journey towards sustainable and successful agriculture.</p>
+    </section>
+
+<section id="services-info">
+    <h2>Services</h2>
+    <p>We provide crop seeds, agrochemicals, and fertilizers</p>
+    <p>Our products:</p>
+    <ul>
+        <li>
+            <label for="product-selector">Select a category:</label>
+            <select id="product-selector" onchange="showProductCategory()">
+                <option value="livestock">Livestock</option>
+                <option value="crops">Crops</option>
+            </select>
+        </li>
+
+        
+        <li id="livestock-info">
+            <h3>Feeds Information</h3>
+            <label for="feeds-selector">Select a category:</label>
+            <select id="feeds-info">
+                <!-- Add information about feeds here -->
+            </select>
+        </li>
+
+        <li id="crops-info">
+            <h2>Crops Information</h2>
+            <label for="crops-selector">Select a crop category:</label>
+            <select id="crops-selector" onchange="showCropsCategory()">
+                <option value="seeds">Seeds</option>
+                <option value="agrochemicals">Agrochemicals</option>
+                <option value="fertilizers">Fertilizers</option>
+            </select>
+            <div id="seeds-info">
+                <h3>Seeds Information</h3>
+                <div id="collards-info" class="product-category">
+                    <h4>Collards information</h4>
+                    <p>Description for Collards:</p>
+                    <img src='https://i.imgur.com/fMerKxr.png' alt='Collards Image'>
+                    <h4 id="Availability-collards">Availability: </h4>
+                    <h4 id="Price-collards">Price: </h4>
+                    <h4 id="Payment-Methods-collards">Payment Methods: </h4>
+                </div>
+                <div id="dek8031-info" class="product-category seeds-category dek8031-info">
+                    <h4>Dekalb information</h4>
+                    <p>Description for DEKALB seed:</p>
+                    <img src='https://i.imgur.com/Viyae8A.png' alt='DEKALB Seed Image'>
+                    <img src='https://i.imgur.com/gX32ezW.png' alt='DEKALB Seed Image'>
+                    <h4 id="Availability-dek8031">Availability: </h4>
+                    <h4 id="Price-dek8031">Price: </h4>
+                    <h4 id="Payment-Methods-dek8031">Payment Methods: </h4>
+                </div>
+                <div id="pusaSawani-info" class="product-category seeds-category pusaSawani-info">
+                    <h4>Royalseed information</h4>
+                    <p>Description for Royalseed:</p>
+                    <img src='https://i.imgur.com/IHg376s.png' alt='Royalseed Image'>
+                    <h4 id="Availability-pusaSawani">Availability: </h4>
+                    <h4 id="Price-pusaSawani">Price: </h4>
+                    <h4 id="Payment-Methods-pusaSawani">Payment Methods: </h4>
+                </div>
+                <div id="onionRedCreole-info" class="product-category seeds-category onionRedCreole-info">
+                    <h4>Simlaw Seeds information</h4>
+                    <p>Description for Simlaw seeds:</p>
+                    <img src='https://i.imgur.com/P20M8Do.png' alt='Simlaw seeds Image'>
+                    <h4 id="Availability-onionRedCreole">Availability: </h4>
+                    <h4 id="Price-onionRedCreole">Price: </h4>
+                    <h4 id="Payment-Methods-onionRedCreole">Payment Methods: </h4>
+                </div>
+                <div id="omni-info" class="product-category seeds-category omni-info">
+                    <h4>OMNI agriculture LTD(EGG PLANT BLACK BEAUTY) information</h4>
+                    <p>Description for OMNI agriculture LTD:</p>
+                    <img src='https://i.imgur.com/nCBrNxd.jpg' alt='OMNI agriculture LTD Image'>
+                    <h4 id="Availability-omni">Availability: </h4>
+                    <h4 id="Price-omni">Price: </h4>
+                    <h4 id="Payment-Methods-omni">Payment Methods: </h4>
+                </div>
+            </div>
+
+            <div id="agrochemicals-info" class="product-category">
+                <h3>Agrochemicals Information</h3>
+                <label for="agrochemicals-selector">Select a category:</label>
+                <select id="agrochemicals-selector" onchange="showAgrochemicalsSubCategory()">
+                    <option value="insecticides">Insecticides</option>
+                    <option value="fungicides">Fungicides</option>
+                </select>
+
+                <div id="insecticides-info" class="insecticides-info">
+                    <h4>Insecticides Information</h4>
+                    <div id="decisEC-info">
+                        <h5>Decis (Emulsifiable Concentrate)</h5>
+                        <p>Description for Decis (Emulsifiable Concentrate):</p>
+                        <img src='https://i.imgur.com/jyHLaZV.jpg' alt='Decis Image'>
+                        <p>Description for Decis (Emulsifiable Concentrate) 50 ml:</p>
+                        <img src='https://i.imgur.com/rfKr7Ct.jpg' alt='Decis Image'>
+                    </div>
+                    <div id="tihan-info">
+                        <h5>TIHAN OD 175 information</h5>
+                        <p>Description for TIHAN OD 175:</p>
+                        <img src='https://i.imgur.com/Wxz6ai8.jpg' alt='TIHAN Image'>
+                    </div>
+                    <div id="belt-info">
+                        <h5>Belt information</h5>
+                        <p>Description for Belt:</p>
+                        <img src='https://i.imgur.com/jzHf5jl.jpg' alt='Belt Image'>
+                        <p>Description for Belt insecticides 250 ml:</p>
+                        <img src='https://i.imgur.com/ZQvx66S.jpg' alt='Belt 250ml Image'>
+                    </div>
+                    <div id="ranger-info">
+                        <h5>Ranger® 480EC information</h5>
+                        <p>Description for Ranger® 480EC:</p>
+                        <p>It is a non-systematic contact and stomach insecticide for foliar and stem application that is active against insect pests</p>
+                        <img src='https://i.imgur.com/jKIrqnp.jpg' alt='Ranger® 480EC Image'>
+                    </div>
+                    <div id="marshal-info">
+                        <h5>Marshal 250 EC information</h5>
+                        <p>Description for Marshal 250 EC:</p>
+                        <img src='https://i.imgur.com/Yd5bJln.jpg' alt='Marshal 250 EC Image'>
+                   </div>
+                   <div id="oberon-info">
+                        <h5>oberon speed sc 240 information</h5>
+                        <p>Description for oberon speed sc 240:</p>
+                        <img src='https://i.imgur.com/SbkkVro.jpg' alt='oberon speed sc 240 Image'>
+                    </div>
+                    <div id="pentagon-info">
+                        <h5>Pentagon 50EC information</h5>
+                        <p>Description for Pentagon 50EC:</p>
+                        <img src='https://i.imgur.com/k2s34PQ.jpg' alt='Pentagon 50EC Image'>
+                    </div>
+                    <div id="taurus-info">
+                        <h5>Taurus Information</h5>
+                        <p>Description for Taurus:</p>
+                        <img src='https://i.imgur.com/juH7hM7.jpg' alt='Taurus Image'>
+                    </div>
+                    <div id="prove-info">
+                        <h5>Prove 1.92 EC Information</h5>
+                        <p>Description for Prove 1.92 EC:</p>
+                        <img src='https://i.imgur.com/28wHA4z.jpg' alt='Prove 1.92 EC Image'>
+                    </div>
+                    <div id="secure-info">
+                        <h5>Secure 240 SC Information</h5>
+                        <p>Description for Secure 240 SC:</p>
+                        <img src='https://i.imgur.com/aqtth4W.jpg' alt='Secure 240 SC Image'>
+                    </div>
+                </div>
+
+                <div id="fungicides-info" class="fungicides-info">
+                    <h4>Fungicides Information</h4>
+                    <div id="antracol-info">
+                        <h5>Antracol WP70 500 g infromation</h5>
+                        <p>Description for Antracol WP70 500g:</p>
+                        <img src='https://i.imgur.com/mkwx73v.jpg' alt='Antracol WP70 500g Image'>
+                    </div>
+                    <div id="luna-info">
+                        <h5>Luna SENSATION Information</h5>
+                        <p>Description for Luna sensation:</p>
+                        <img src='https://i.imgur.com/Sv3jD0r.jpg' alt='Luna sensation Image'>
+                    </div>
+                    <div id="folicur-info">
+                        <h5>Folicur EW250 Information</h5>
+                        <p>Description for Folicur EW250:</p>
+                        <img src='https://i.imgur.com/DeYWPxz.jpg' alt='Folicur EW250 Image'>
+                    </div>
+                    <div id="infinito-info">
+                        <h5>Infinito SC 687.5 Information</h5>
+                        <p>Description for Infinito SC 687.5:</p>
+                        <img src='https://i.imgur.com/TxKvtGv.jpg' alt='Infinito SC 687.5 Image'>
+                    </div>
+                    <div id="metacop-info">
+                        <h5>Metacop 450WP Information</h5>
+                        <p>Description for Metacop 450WP:</p>
+                        <img src='https://i.imgur.com/Bn4CQFJ.jpg' alt='Metacop 450WP Image'>
+                    </div>
+                    <div id="nativo-info">
+                        <h5>Nativo SC 300 Information</h5>
+                        <p>Description for Nativo SC 300:</p>
+                        <p>It is used for the control for rust disease</p>
+                        <img src='https://i.imgur.com/yUwrY45.jpg' alt='Nativo SC 300 Image'>
+                    </div>
+                    <div id="milraz-info">
+                        <h5>Milraz WP 76 Information</h5>
+                        <p>Description for Milraz WP 76:</p>
+                        <p>It is used for control of early and late blights</p>
+                        <img src='https://i.imgur.com/8NL0uMB.jpg' alt='Milraz WP 76 Image'>
+                    </div>
+                    <div id="tower-info">
+                        <h5>Tower 720 WP Information</h5>
+                        <p>Description for Tower 720 WP:</p>
+                        <img src='https://i.imgur.com/i3MKhnP.jpg' alt='Tower 720 WP Image'>
+                    </div>
+                </div>
+            </div>
+
+            <div id="fertilizers-info" class="fertilizers-info">
+                <h3>Fertilizers Information</h3>
+                <div id="wuxal-info" class="product-category fertilizers-category">
+                    <h4>Wuxal Macromix information</h4>
+                    <p>Description for Wuxal Macromix:</p>
+                    <img src='https://i.imgur.com/k64FplW.jpg' alt='Wuxal Macromix Image'>
+                    <p>Description for Wuxal Macromix 500ml/755g:</p>
+                    <img src='https://i.imgur.com/iFnTVQB.jpg' alt='Wuxal Macromix Image'>
+                </div>
+                <div id="calmabor-info" class="product-category fertilizers-category">
+                    <h4>Calmabor Gold information</h4>
+                    <p>Description for Calmabor Gold:</p>
+                    <p>Calmabor Gold is a highly soluble calcium magnesium solution with fully chelated trace elements</p>
+                    <img src='https://i.imgur.com/S7VkQ6A.jpg' alt='Calmabor Gold Image'>
+                </div>
+                <div id="easygrofruitandflower-info">
+                    <h4>Easy Gro Fruit and Flower information</h4>
+                    <p>Description for easy gro fruits and flower:</p>
+                    <img src='https://i.imgur.com/FodQqkE.png' alt='easygro fruit and flower Image'>
+                </div>
+                <div id="elgon-info">
+                    <h4>Elgon Thabiti Fertilizers information</h4>
+                    <p>Description for Elgon Thabiti fertilizers:</p>
+                    <img src='https://i.imgur.com/AUHQ60i.jpg' alt='elgon thabiti fertilizers Image'>
+                </div>
+                <div id="easygrovegetative">
+                    <h4>Easy Gro Vegetative Information</h4>
+                    <p>Description for Easy Gro Vegetative Fertilizer:</p>
+                    <p>It is a water-soluble fertilizer used in vegetative stage of the crop</p>
+                    <img src='https://i.imgur.com/XlgJ90F.png' alt='easy gro vegetative Image'>
+                </div>
+                <div id="humipower-info">
+                    <h4>HUMIPOWER fertilizers Information</h4>
+                    <p>Description for HUMIPOWER fertilizers:</p>
+                    <img src='https://i.imgur.com/uAo6ONA.jpg' alt='HUMIPOWER fertilizers Image'>
+                </div>
+                <div id="polyfeed-info">
+                    <h4>Poly-Feed Information</h4>
+                    <p>Description for Poly-Feed fertilizer:</p>
+                    <img src='https://i.imgur.com/UzTI2T8.jpg' alt='Poly-Feed Image'>
+                </div>
+            </div>
+        </li>
+    </ul>
+</section>
+<script>
+    const userCardTemplate = document.querySelector("[data-user-template]");
+    const userCardsContainer = document.getElementById('user-cards-container');
+    const sectionId = document.getElementById('services-info');
+
+    const allUsers = [
+    {
+        "id": 1,
+        "name": "Collards",
+        "category": "seeds",
+        "subcategory": "collards",
+        "description": "Description for Collards",
+        "imageUrl": "https://i.imgur.com/fMerKxr.png"
+      },
+      {
+        "id": 2,
+        "name": "Dekalb",
+        "category": "seeds",
+        "subcategory": "dek8031",
+        "description": "Description for DEKALB seed",
+        "imageUrl": [
+            "https://i.imgur.com/Viyae8A.png",
+            "https://i.imgur.com/gX32ezW.png"
+        ]
+      },
+      {
+        "id": 3,
+        "name": "Royalseed",
+        "category": "seeds",
+        "subcategory": "pusaSawani",
+        "description": "Description for Royalseed",
+        "imageUrl": "https://i.imgur.com/IHg376s.png"
+      },  
+      {
+        "id": 4,
+        "name": "Simlaw Seeds",
+        "category": "seeds",
+        "subcategory": "onionRedCreole",
+        "description": "Description for Simlaw Seeds",
+        "imageUrl": "https://i.imgur.com/P20M8Do.png"
+      },
+      {
+        "id": 5,
+        "name": "OMNI agriculture LTD(EGG PLANT BLACK BEAUTY)",
+        "category": "seeds",
+        "subcategory": "omni",
+        "description": "Description for OMNI agriculture LTD",
+        "imageUrl": "https://i.imgur.com/nCBrNxd.jpg"
+      },
+      {
+        "id": 6,
+        "name": "Decis (Emulsifiable Concentrate)",
+        "category": "insecticides",
+        "subcategory": "decisEC",
+        "description": "Description for Decis (Emulsifiable Concentrate)",
+        "imageUrl": [
+            "https://i.imgur.com/jyHLaZV.jpg",
+            "https://i.imgur.com/rfKr7Ct.jpg"
+        ]
+      },
+      {
+        "id": 7,
+        "name": "TIHAN OD 175",
+        "category": "insecticides",
+        "subcategory": "tihan",
+        "description": "Description for TIHAN OD 175",
+        "imageUrl": "https://i.imgur.com/Wxz6ai8.jpg"
+      },
+      {
+        "id": 8,
+        "name": "Belt",
+        "category": "insecticides",
+        "subcategory": "belt",
+        "description": "Description for Belt",
+        "imageUrl": [
+            "https://i.imgur.com/jzHf5jl.jpg",
+            "https://i.imgur.com/ZQvx66S.jpg"
+        ]
+      },
+      {
+        "id": 9,
+        "name": "Ranger® 480EC",
+        "category": "insecticides",
+        "subcategory": "ranger",
+        "description": "Description for Ranger® 480EC",
+        "imageUrl": "https://i.imgur.com/jKIrqnp.jpg"
+      },
+      {
+        "id": 10,
+        "name": "Marshal 250 EC",
+        "category": "insecticides",
+        "subcategory": "marshal",
+        "description": "Description for Marshal 250 EC",
+        "imageUrl": "https://i.imgur.com/Yd5bJln.jpg"
+      },
+      {
+        "id": 11,
+        "name": "Oberon Speed SC 240",
+        "category": "insecticides",
+        "subcategory": "oberon",
+        "description": "Description for Oberon Speed SC 240",
+        "imageUrl": "https://i.imgur.com/SbkkVro.jpg"
+      },
+      {
+        "id": 12,
+        "name": "Pentagon 50EC",
+        "category": "insecticides",
+        "subcategory": "pentagon",
+        "description": "Description for Pentagon 50EC",
+        "imageUrl": "https://i.imgur.com/k2s34PQ.jpg"
+      },
+      {
+        "id": 13,
+        "name": "Taurus",
+        "category": "insecticides",
+        "subcategory": "taurus",
+        "description": "Description for Taurus",
+        "imageUrl": "https://i.imgur.com/juH7hM7.jpg"
+      },
+      {
+        "id": 14,
+        "name": "Prove 1.92 EC",
+        "category": "insecticides",
+        "subcategory": "prove",
+        "description": "Description for Prove 1.92 EC",
+        "imageUrl": "https://i.imgur.com/28wHA4z.jpg"
+      },
+      {
+        "id": 15,
+        "name": "Secure 240 SC",
+        "category": "insecticides",
+        "subcategory": "secure",
+        "description": "Description for Secure 240 SC",
+        "imageUrl": "https://i.imgur.com/aqtth4W.jpg"
+      },
+      {
+        "id": 16,
+        "name": "Antracol WP70",
+        "category": "fungicides",
+        "subcategory": "antracol",
+        "description": "Description for Antracol WP70 500g",
+        "imageUrl": "https://i.imgur.com/mkwx73v.jpg"
+      },
+      {
+        "id": 17,
+        "name": "Luna SENSATION",
+        "category": "fungicides",
+        "subcategory": "luna",
+        "description": "Description for Luna sensation",
+        "imageUrl": "https://i.imgur.com/Sv3jD0r.jpg"
+      },
+      {
+        "id": 18,
+        "name": "Folicur EW250",
+        "category": "fungicides",
+        "subcategory": "folicur",
+        "description": "Description for Folicur EW250",
+        "imageUrl": "https://i.imgur.com/DeYWPxz.jpg"
+      },
+      {
+        "id": 19,
+        "name": "Infinito SC 687.5",
+        "category": "fungicides",
+        "subcategory": "infinito",
+        "description": "Description for Infinito SC 687.5",
+        "imageUrl": "https://i.imgur.com/TxKvtGv.jpg"
+      },
+      {
+        "id": 20,
+        "name": "Metacop 450WP",
+        "category": "fungicides",
+        "subcategory": "metacop",
+        "description": "Description for Metacop 450WP",
+        "imageUrl": "https://i.imgur.com/Bn4CQFJ.jpg"
+      },
+      {
+        "id": 21,
+        "name": "Nativo SC 300",
+        "category": "fungicides",
+        "subcategory": "nativo",
+        "description": "Description for Nativo SC 300",
+        "imageUrl": "https://i.imgur.com/yUwrY45.jpg"
+      },
+      {
+        "id": 22,
+        "name": "Milraz WP 76",
+        "category": "fungicides",
+        "subcategory": "milraz",
+        "description": "Description for Milraz WP 76",
+        "imageUrl": "https://i.imgur.com/8NL0uMB.jpg"
+      },
+      {
+        "id": 23,
+        "name": "Tower 720 WP",
+        "category": "fungicides",
+        "subcategory": "tower",
+        "description": "Description for Tower 720 WP",
+        "imageUrl": "https://i.imgur.com/i3MKhnP.jpg"
+      },
+      {
+        "id": 24,
+        "name": "Wuxal Macromix",
+        "category": "fertilizers",
+        "subcategory": "wuxal",
+        "description": "Description for Wuxal Macromix",
+        "imageUrl": [
+            "https://i.imgur.com/k64FplW.jpg",
+            "https://i.imgur.com/iFnTVQB.jpg"
+        ]
+      },
+      {
+        "id": 25,
+        "name": "Calmabor Gold",
+        "category": "fertilizers",
+        "subcategory": "calmabor",
+        "description": "Description for Calmabor Gold",
+        "imageUrl": "https://i.imgur.com/S7VkQ6A.jpg"
+      },
+      {
+        "id": 26,
+        "name": "Easy Gro Fruit and Flower",
+        "category": "fertilizers",
+        "subcategory": "easygrofruitandflower",
+        "description": "Description for easy gro fruit and flower",
+        "imageUrl": "https://i.imgur.com/FodQqkE.png"
+      },
+      {
+        "id": 27,
+        "name": "Elgon Thabiti Fertilizers",
+        "category": "fertilizers",
+        "subcategory": "elgon",
+        "description": "Description for Elgon Thabiti Fertilizers",
+        "imageUrl": "https://i.imgur.com/AUHQ60i.jpg"
+      },
+      {
+        "id": 28,
+        "name": "Easy Gro Vegetative",
+        "category": "fertilizers",
+        "subcategory": "easygrovegetative",
+        "description": "Description for Easy Gro Vegetative",
+        "imageUrl": "https://i.imgur.com/XlgJ90F.png"
+      },
+      {
+        "id": 29,
+        "name": "HUMIPOWER fertilizers",
+        "category": "fertilizers",
+        "subcategory": "humipower",
+        "description": "Description for HUMIPOWER fertilizers",
+        "imageUrl": "https://i.imgur.com/uAo6ONA.jpg"
+      },
+      {
+        "id": 30,
+        "name": "Poly-Feed",
+        "category": "fertilizers",
+        "subcategory": "polyfeed",
+        "description": "Description for Poly-Feed fetilizer",
+        "imageUrl": "https://i.imgur.com/UzTI2T8.jpg"
+      }
+    ];
+
+
+    function displayUserCards(users) {
+    userCardsContainer.innerHTML = '';
+
+    users.forEach(user => {
+        const card = userCardTemplate.content.cloneNode(true);
+        card.querySelector('.header').textContent = user.name;
+        card.querySelector('.body').textContent = user.description; // Use 'description' instead of 'details'
+
+        // If the user has an image (or images), display it/them
+        if (user.imageUrl) {
+            if (Array.isArray(user.imageUrl)) {
+                // If it's an array of images, create multiple image elements
+                user.imageUrl.forEach(imageUrl => {
+                    const imageElement = document.createElement('img');
+                    imageElement.src = imageUrl;
+                    card.querySelector('.body').appendChild(imageElement);
+                });
+            } else {
+                // If it's a single image, create a single image element
+                const imageElement = document.createElement('img');
+                imageElement.src = user.imageUrl;
+                card.querySelector('.body').appendChild(imageElement);
+            }
+        }
+
+        userCardsContainer.appendChild(card);
+    });
+}
+
+function performSearch() {
+    const searchTerm = document.getElementById('search').value.trim().toLowerCase();
+
+    if (searchTerm === "") {
+        // No search input, do nothing
+        userCardsContainer.innerHTML = '';
+        return;
+    }
+
+    const matchingProducts = allUsers.filter(user => user.name.toLowerCase().includes(searchTerm));
+
+    if (matchingProducts.length > 0) {
+        displayUserCards(matchingProducts);
+    } else {
+        userCardsContainer.innerHTML = '<p>No matching product found.</p>';
+    }
+}
+
+</script>
+<?php
+$ch = curl_init('https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials');
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    'Authorization: Basic ' . base64_encode('YOUR_APP_CONSUMER_KEY:YOUR_APP_CONSUMER_SECRET')
+]);
+curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+$response = curl_exec($ch);
+echo json_decode($response);
+?>
+
+<?php
+require __DIR__ . '/vendor/autoload.php';
+
+use Carbon\Carbon;
+
+if (isset($_GET['amount'])) {
+    stkPush($_GET['amount']);
+}
+
+function newAccessToken()
+{
+    $consumer_key = "YOUR_CONSUMER_KEY";
+    $consumer_secret = "YOUR_CONSUMER_SECRET";
+
+    $credentials = base64_encode($consumer_key . ":" . $consumer_secret);
+    $url = "https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials";
+
+    $curl = curl_init();
+    curl_setopt($curl, CURLOPT_URL, $url);
+    curl_setopt($curl, CURLOPT_HTTPHEADER, array("Authorization: Basic " . $credentials, "Content-Type:application/json"));
+    curl_setopt($curl, CURLOPT_HEADER, false);
+    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+    $curl_response = curl_exec($curl);
+    $access_token = json_decode($curl_response);
+    curl_close($curl);
+
+    return $access_token->access_token;
+}
+
+function stkPush($amount)
+{
+    $url = 'https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest';
+
+    // Initialize cURL handle
+    $curl = curl_init();
+
+    $curl_post_data = [
+        'BusinessShortCode' => 174379,
+        'Password' => lipaNaMpesaPassword(),
+        'Timestamp' => Carbon::rawParse('now')->format('YmdHms'),
+        'TransactionType' => 'CustomerPayBillOnline',
+        'Amount' => $amount,
+        'PartyA' => "254790765441",
+        'PartyB' => 174379,
+        'PhoneNumber' => "254790765441",
+        'CallBackURL' => 'https://your-callback-url.com/callback',
+        'AccountReference' => "Simon's Tech School Payment",
+        'TransactionDesc' => "lipa Na M-PESA"
+    ];
+
+    $data_string = json_encode($curl_post_data);
+
+    // Set cURL options
+    curl_setopt($curl, CURLOPT_URL, $url);
+    curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type:application/json', 'Authorization:Bearer ' . newAccessToken()));
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($curl, CURLOPT_POST, true);
+    curl_setopt($curl, CURLOPT_POSTFIELDS, $data_string);
+
+    // Execute cURL request
+    $curl_response = curl_exec($curl);
+    print_r($curl_response);
+
+    // Close cURL handle
+    curl_close($curl);
+}
+
+function lipaNaMpesaPassword()
+{
+    // timestamp
+    $timestamp = Carbon::rawParse('now')->format('YmdHms');
+    // passkey
+    $passKey = "bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919";
+    $businessShortCode = 174379;
+    // generate password
+    $mpesaPassword = base64_encode($businessShortCode . $passKey . $timestamp);
+
+    return $mpesaPassword;
+}
+?>
+
+
+    <footer>
+        <p>&copy; 2023 Farmlands Crops and Livestock</p>
+    </footer>
+
+</body>
+
+</html>
