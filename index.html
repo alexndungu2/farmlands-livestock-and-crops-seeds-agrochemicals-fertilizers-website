@@ -31,6 +31,17 @@
             background: inherit;
             filter: blur(8px); /* Initial blur value */
         }
+        .search-wrapper {
+            background:  url("https://i.imgur.com/z321vyx.jpg") no-repeat center center fixed;
+            background-size: cover;
+            padding: auto;
+            margin: auto;
+            font-size: large;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-weight: bolder;
+            text-align: center;
+            color: rgb(1, 5, 3);
+        }
         #home-info {
             background:  url("https://i.imgur.com/z321vyx.jpg") no-repeat center center fixed;
             background-size: cover;
@@ -40,7 +51,7 @@
             font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
             font-weight: bolder;
             text-align: center;
-            color: yellowgreen;
+            color: rgb(1, 5, 3);
         }
         #about-info {
             background: url("https://i.imgur.com/z321vyx.jpg") no-repeat center center fixed;
@@ -51,7 +62,7 @@
             font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
             font-weight: bolder;
             text-align: center;
-            color: yellowgreen;
+            color: rgb(1, 5, 3);
         }
         #services-info {
             position: relative;
@@ -61,7 +72,7 @@
             font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
             font-weight: bolder;
             text-align: center;
-            color: yellowgreen;
+            color: rgb(1, 5, 3);
             overflow: hidden; /* Ensure content doesn't overflow outside the container */
         }
 
@@ -87,10 +98,10 @@
             font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
             font-weight: bolder;
             text-align: center;
-            color: yellowgreen;
+            color: rgb(1, 5, 3);
         }
         .main-nav a {
-            text-decoration: none;
+            text-decoration: aquamarine;
             color: white;
             font-weight: bold;
             font-size: 16px;
@@ -122,10 +133,10 @@
             color: green;
         }
         h4 {
-            color: green;
+            color: rgb(111, 223, 59);
         }
         h5 {
-            color: yellowgreen;
+            color: rgb(192, 230, 116);
         }
 
         select {
@@ -168,7 +179,9 @@ function showSection(sectionId) {
         var currentSection = document.getElementById(section);
 
         // Set display based on whether it's the selected section or not
-        currentSection.style.display = section === sectionId ? "block" : "none";
+        if (currentSection) {
+            currentSection.style.display = section === sectionId ? "block" : "none";
+        }
     });
 }
 
