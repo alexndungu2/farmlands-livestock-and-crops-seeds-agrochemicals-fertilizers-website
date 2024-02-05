@@ -16,9 +16,15 @@ input {
 }
 
 .cards {
-    border: 1px solid rgb(228, 243, 234);
-    background-color: rgb(218, 231, 219);
-    padding: .5rem;
+    background:  url("https://i.imgur.com/z321vyx.jpg") no-repeat center center fixed;
+    background-size: cover;
+    padding: 0px;
+    margin: auto;
+    font-size: large;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: bolder;
+    text-align: center;
+    color: rgb(1, 5, 3);
 }
 
 .cards > .header {
@@ -26,8 +32,15 @@ input {
 }
 
 .cards > .body {
-    font-size: .8rem;
-    color: #777;
+    background:  url("https://i.imgur.com/z321vyx.jpg") no-repeat center center fixed;
+    background-size: cover;
+    padding: 0px;
+    margin: auto;
+    font-size: large;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-weight: bolder;
+    text-align: center;
+    color: rgb(1, 5, 3);
 }
 
 .hide {
